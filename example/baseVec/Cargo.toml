@@ -1,0 +1,6 @@
+[package]
+name = "baseVec"
+version = "0.1.0"
+authors = ["qiongtubao <810776886@qq.com>"]
+
+[dependencies]
