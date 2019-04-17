@@ -50,6 +50,26 @@ String
     let array = vec![1,2,3];
   ```
 6. map -> std::collections::HashMap
- struct
- tuple
- Option<T>
+ 
+7. struct
+  ```
+    struct studentA {
+      name: String,
+      age: i8
+    }
+
+    struct studentB(String, i8);
+  ```
+ 8. tuple
+
+  ```
+  
+  ```
+9. enum 
+
+```
+  enum Option<T> {
+    None,
+    Some(T)
+  }
+```
