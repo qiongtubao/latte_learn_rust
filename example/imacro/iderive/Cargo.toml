@@ -1,7 +1,13 @@
 [package]
-name = "imacro"
+name = "iderive"
 version = "0.1.0"
 authors = ["qiongtubao <810776886@qq.com>"]
 
+
+[lib]
+proc-macro=true
 [dependencies]
-iderive = { path="iderive" }
+regex = "0.2"
+
+
+

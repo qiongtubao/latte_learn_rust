@@ -8,7 +8,21 @@ macro_rules! hashmap {
         }
     }
 }
+
+#[macro_use]
+extern crate iderive; 
+trait THelloWorld {
+    // add code here
+    fn hello(); 
+}
+
+
+#[derive(HelloWorld)]
+struct FrenchToast; 
+
+
 fn main() {
     let hash = hashmap!["hello" => 1, "world" => 2];
     println!("{:?}", hash);
+    FrenchToast::hello(); 
 }
