@@ -1,0 +1,8 @@
+[package]
+name = "irocket"
+version = "0.1.0"
+authors = ["qiongtubao <810776886@qq.com>"]
+edition = "2018"
+
+[dependencies]
+rocket = {path="rocket/core/lib"}
