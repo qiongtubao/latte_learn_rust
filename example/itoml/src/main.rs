@@ -1,47 +1,83 @@
 #![deny(warnings)]
-
-use std::env;
 use std::fs::File;
-use std::io;
 use std::io::prelude::*;
-
-use serde_json::Value as Json;
 use toml::Value as Toml;
-
+use serde_derive::Deserialize;
+use std::collections::HashMap;
+#[derive(Debug,Deserialize)]
+struct Cargo {
+    dependencies: HashMap<String, String>,
+}
 fn main() {
-    let mut args = env::args();
     let mut input = String::new();
-    if args.len() > 1 {
-        let name = args.nth(1).unwrap();
-        File::open(&name)
+    let name = "Cargo.toml";
+     File::open(&name)
             .and_then(|mut f| f.read_to_string(&mut input))
             .unwrap();
-    } else {
-        io::stdin().read_to_string(&mut input).unwrap();
-    }
 
-    match input.parse() {
-        Ok(toml) => {
-            let json = convert(toml);
-            println!("{}", serde_json::to_string_pretty(&json).unwrap());
+    match toml::from_str(&input) {
+        Ok(t) => {
+            parse(t);
         }
         Err(error) => println!("failed to parse TOML: {}", error),
     }
 }
+#[derive(Debug,Deserialize)]
+struct Info {
+    path: Option<String>,
+    version: Option<String>,
+    features: Option<Vec<String>>,
+}
+#[derive(Debug, Deserialize)]
+enum Version {
+    String(String),
+    Info(Info),
+}
 
-fn convert(toml: Toml) -> Json {
-    match toml {
-        Toml::String(s) => Json::String(s),
-        Toml::Integer(i) => Json::Number(i.into()),
-        Toml::Float(f) => {
-            let n = serde_json::Number::from_f64(f).expect("float infinite and nan not allowed");
-            Json::Number(n)
-        }
-        Toml::Boolean(b) => Json::Bool(b),
-        Toml::Array(arr) => Json::Array(arr.into_iter().map(convert).collect()),
-        Toml::Table(table) => {
-            Json::Object(table.into_iter().map(|(k, v)| (k, convert(v))).collect())
-        }
-        Toml::Datetime(dt) => Json::String(dt.to_string()),
+impl From<String> for Version {
+    fn from(version: String) -> Version {
+        Version::String(version)
     }
 }
+// impl From<Toml::String> for Version {
+//     fn from(version: Toml::String) -> Version {
+//         Version::String(version.to_string())
+//     }
+// }
+impl From<Info> for Version {
+    fn from(version: Info) -> Version {
+        Version::Info(version)
+    }
+}
+impl<'a> From<&'a str> for Version {
+    fn from(str: &'a str) -> Version {
+        Version::String(str.to_string())
+    }
+}
+impl From<Toml> for Version {
+    fn from(_: Toml) -> Version {
+        let info = Info {
+            path: None,
+            version: None,
+            features: None
+        };
+        Version::Info(info)
+    }
+}
+fn parse(t: Cargo) {
+    println!("{:?}", t);
+    //let mut hash = HashMap::new();
+    // match t.dependencies {
+    //     Toml::Table(table) => {
+    //         for (i, n) in table.into_iter().enumerate() {
+    //             hash.insert(i , n);
+    //         }
+    //         // table.into_iter().for_each(|(k, v)| hash.insert(k, v););
+    //     },
+    //     _ => {
+    //         println!("{:?}", "文件格式错误");
+    //     }
+    // }
+    println!("hash: {:?}", t.dependencies);
+}
+
