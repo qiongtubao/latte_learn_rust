@@ -1,0 +1,32 @@
+[badges.travis-ci]
+repository = "alexcrichton/proc-macro2"
+[dependencies.unicode-xid]
+path = "../unicode-xid-0.2.0"
+version = "0.2"
+[dev-dependencies.quote]
+version = "1.0"
+
+[features]
+default = ["proc-macro"]
+nightly = []
+proc-macro = []
+span-locations = []
+
+[lib]
+name = "proc_macro2"
+
+[package]
+authors = ["Alex Crichton <alex@alexcrichton.com>"]
+description = "A stable implementation of the upcoming new `proc_macro` API. Comes with an\noption, off by default, to also reimplement itself in terms of the upstream\nunstable API.\n"
+documentation = "https://docs.rs/proc-macro2"
+edition = "2018"
+homepage = "https://github.com/alexcrichton/proc-macro2"
+keywords = ["macros"]
+license = "MIT OR Apache-2.0"
+name = "proc-macro2"
+readme = "README.md"
+repository = "https://github.com/alexcrichton/proc-macro2"
+version = "1.0.1"
+[package.metadata.docs.rs]
+rustc-args = ["--cfg", "procmacro2_semver_exempt"]
+rustdoc-args = ["--cfg", "procmacro2_semver_exempt"]

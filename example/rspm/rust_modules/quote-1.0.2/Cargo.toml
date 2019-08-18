@@ -1,0 +1,32 @@
+[badges.travis-ci]
+repository = "dtolnay/quote"
+[dependencies.proc-macro2]
+default-features = false
+path = "../proc-macro2-1.0.1"
+version = "1.0"
+[dev-dependencies.rustversion]
+version = "0.1"
+
+[dev-dependencies.trybuild]
+version = "1.0"
+
+[features]
+default = ["proc-macro"]
+proc-macro = ["proc-macro2/proc-macro"]
+
+[lib]
+name = "quote"
+
+[package]
+authors = ["David Tolnay <dtolnay@gmail.com>"]
+categories = ["development-tools::procedural-macro-helpers"]
+description = "Quasi-quoting macro quote!(...)"
+documentation = "https://docs.rs/quote/"
+edition = "2018"
+include = ["Cargo.toml", "src/**/*.rs", "tests/**/*.rs", "README.md", "LICENSE-APACHE", "LICENSE-MIT"]
+keywords = ["syn"]
+license = "MIT OR Apache-2.0"
+name = "quote"
+readme = "README.md"
+repository = "https://github.com/dtolnay/quote"
+version = "1.0.2"

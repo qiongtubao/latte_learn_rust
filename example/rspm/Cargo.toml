@@ -1,0 +1,15 @@
+
+[dependencies.fs_extra]
+version = "*"
+
+[dependencies.regex]
+version = "*"
+
+[dependencies.toml]
+version = "*"
+
+[package]
+authors = ["qiongtubao <810776886@qq.com>"]
+edition = "2018"
+name = "rspm"
+version = "0.1.0"

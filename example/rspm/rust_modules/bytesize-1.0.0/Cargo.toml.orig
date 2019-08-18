@@ -1,0 +1,15 @@
+[package]
+name = "bytesize"
+description = "an utility for human-readable bytes representations"
+version = "1.0.0"
+authors = ["Hyunsik Choi <hyunsik.choi@gmail.com>"]
+
+homepage = "https://github.com/hyunsik/bytesize/"
+documentation = "https://docs.rs/bytesize/"
+repository = "https://github.com/hyunsik/bytesize/"
+readme = "README.md"
+keywords = ["byte", "byte-size", "utility", "human-readable", "format"]
+license = "Apache-2.0"
+
+[dependencies]
+serde = { version = "1.0", optional = true, features = ["derive"] }
